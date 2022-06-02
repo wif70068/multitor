@@ -104,7 +104,25 @@ function CreateTorProcess() {
 
     _logger "warn" \
       "${_FUNCTION_ID}()" \
-      "no process was created"
+      "no process was created: " \
+        "sudo -u ${_arg_uname} tor -f ${_torrc_config}" \
+       "--RunAsDaemon 1 " \
+       "--CookieAuthentication 0 " \
+       "--SocksPort ${_arg_socks} " \
+       "--ControlPort {$_arg_control} " \
+       "--PidFile ${_proc_dir}/${_arg_socks}.pid " \
+       "--DataDirectory ${_proc_dir} " \
+       "--SocksBindAddress 127.0.0.1 " \
+       "--NewCircuitPeriod 15 " \
+       "--MaxCircuitDirtiness 15 " \
+       "--NumEntryGuards 8 " \
+       "--CircuitBuildTimeout 5 " \
+       "--ExitRelay 0 " \
+       "--RefuseUnknownExits 0 " \
+       "--ClientOnly 1 " \
+       "--StrictNodes 1 " \
+       "--AllowSingleHopCircuits 1 " \
+       ">>${_log_stdout} 2>&1 ;"
 
     _tor_processes_fail=$((_tor_processes_fail + 1))
 
