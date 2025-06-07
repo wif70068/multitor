@@ -911,9 +911,10 @@ function __main__() {
     fi
 
     # Password required at this stage.
-    read -rsp "Enter password: " _pass_in
+    # read -rsp "Enter password: " _pass_in
+    _pass_in=""
 
-    echo
+    # echo
 
     if [[ ${#_tor_processes[@]} -ne 0 ]] ; then
 
